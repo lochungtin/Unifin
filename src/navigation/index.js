@@ -39,13 +39,13 @@ class AppNav extends React.Component {
                             let name = '';
                             switch (route.name) {
                                 case 'Scan':
-                                    name = 'home';
+                                    name = 'scan-helper';
                                     break;
                                 case 'Home':
                                     name = 'home';
                                     break;
                                 case 'Sub':
-                                    name = 'home';
+                                    name = 'account';
                                     break;
                                 case 'Settings':
                                     name = 'dots-horizontal-circle-outline';
