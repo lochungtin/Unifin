@@ -16,28 +16,38 @@ export const createAccount = async () => {
 }
 
 export const genTransactions = async (userID) => {
-    const search = await fetch('https://sandbox.capitalone.co.uk/developer-services-platform-pr/api/data/transactions/accounts/' + userID + '/create',
-        {
-            method: 'POST',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + key,
-                'version': '1.0'
-            }),
-            body: JSON.stringify({ 'quantity': 10 })
-        }
-    ).then(res => res.json());
-    return search;
+    try {
+        const search = await fetch('https://sandbox.capitalone.co.uk/developer-services-platform-pr/api/data/transactions/accounts/' + userID + '/create',
+            {
+                method: 'POST',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + key,
+                    'version': '1.0'
+                }),
+                body: JSON.stringify({ 'quantity': 10 })
+            }
+        ).then(res => res.json());
+        return search;
+    }
+    catch {
+        return [];
+    }
 }
 
 export const fetchRecords = async (userID) => {
-    const search = await fetch('https://sandbox.capitalone.co.uk/developer-services-platform-pr/api/data/transactions/accounts/' + userID + '/transactions',
-        {
-            headers: new Headers({
-                'Authorization': 'Bearer ' + key,
-                'version': '1.0'
-            })
-        }
-    ).then(res => res.json());
-    return search;
+    try {
+        const search = await fetch('https://sandbox.capitalone.co.uk/developer-services-platform-pr/api/data/transactions/accounts/' + userID + '/transactions',
+            {
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + key,
+                    'version': '1.0'
+                })
+            }
+        ).then(res => res.json());
+        return search;
+    }
+    catch {
+        return [];
+    }
 }
