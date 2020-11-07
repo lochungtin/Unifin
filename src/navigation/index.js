@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 
 import homeScreen from '../screens/homeScreen';
+import settingsScreen from '../screens/settingsScreen';
 
 const Main = createStackNavigator();
 const Root = createBottomTabNavigator();
@@ -36,6 +37,9 @@ class AppNav extends React.Component {
                                 case 'Home':
                                     name = 'home';
                                     break;
+                                case 'Settings':
+                                    name = 'dots-horizontal-circle-outline';
+                                    break;
                             }
                             return <Icon name={name} size={size} color={color} />
                         }
@@ -45,6 +49,8 @@ class AppNav extends React.Component {
                     }}
                 >
                     <Root.Screen name='Home' component={this.main} />
+                    <Root.Screen name='Home' component={this.main} />
+                    <Root.Screen name='Settings' component={settingsScreen} />
                 </Root.Navigator>
             </NavigationContainer>
         )
