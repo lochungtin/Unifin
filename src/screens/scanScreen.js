@@ -5,7 +5,7 @@ export default class Screen extends React.Component {
     render() {
         return (
             <View>
-                <Text>Home Screen</Text>
+                <Text>Scan Screen</Text>
             </View>
         );
     }
