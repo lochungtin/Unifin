@@ -24,7 +24,7 @@ class AppNav extends React.Component {
         return (
             <Main.Navigator>
                 <Main.Screen name='Home' component={homeScreen} options={{ headerShown: false }} />
-                <Main.Screen name='Detail' component={detailScreen} options={{ headerShown: false }} />
+                <Main.Screen name='Detail' component={detailScreen} />
             </Main.Navigator>
         )
     }
@@ -39,13 +39,13 @@ class AppNav extends React.Component {
                             let name = '';
                             switch (route.name) {
                                 case 'Scan':
-                                    name = 'home';
+                                    name = 'scan-helper';
                                     break;
                                 case 'Home':
                                     name = 'home';
                                     break;
                                 case 'Sub':
-                                    name = 'home';
+                                    name = 'account';
                                     break;
                                 case 'Settings':
                                     name = 'dots-horizontal-circle-outline';
