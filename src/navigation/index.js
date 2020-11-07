@@ -24,7 +24,7 @@ class AppNav extends React.Component {
         return (
             <Main.Navigator>
                 <Main.Screen name='Home' component={homeScreen} options={{ headerShown: false }} />
-                <Main.Screen name='Detail' component={detailScreen} options={{ headerShown: false }} />
+                <Main.Screen name='Detail' component={detailScreen} />
             </Main.Navigator>
         )
     }

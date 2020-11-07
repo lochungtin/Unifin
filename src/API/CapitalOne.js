@@ -24,7 +24,7 @@ export const genTransactions = async (userID) => {
             'Authorization': 'Bearer ' + key,
             'version': '1.0'
         }),
-        body: JSON.stringify({ 'quantity': 10 })
+        body: JSON.stringify({ 'quantity': 20 })
     };
     try {
         const search = await fetch(api, opt).then(res => res.json());

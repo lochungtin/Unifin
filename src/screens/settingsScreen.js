@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import { createAccount, genTransactions, fetchRecords } from '../API/CapitalOne';
-import { addRecords } from '../redux/action';
+import { addRecords, clearRecords } from '../redux/action';
 import { store } from '../redux/store';
 
 class Screen extends React.Component {
@@ -20,6 +20,7 @@ class Screen extends React.Component {
         return (
             <View>
                 <TouchableOpacity onPress={() => {
+                    store.dispatch(clearRecords());
                     createAccount().then(acc => {
                         this.setState({ UID: acc.Accounts[0].accountId });
                         console.log('ok');
@@ -39,6 +40,7 @@ class Screen extends React.Component {
                         fetchRecords(this.state.UID).then(res => {
                             console.log(res.Transactions.length);
                             store.dispatch(addRecords(res.Transactions));
+                            console.log(res.Transactions[0]);
                         })
                     }}>
                         <Text>Sync to local</Text>

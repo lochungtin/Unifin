@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
+import { maxWidth, styles } from '../styles';
 import RecordItem from '../Components/RecordItem';
 
 class Screen extends React.Component {
@@ -15,12 +16,13 @@ class Screen extends React.Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.screen}>
                 <SafeAreaView>
-                    <FlatList 
+                    <FlatList
                         data={this.props.records}
                         keyExtractor={item => item.transactionUUID}
-                        renderItem={({item}) => <RecordItem item={item}/>}
+                        renderItem={({ item }) => <RecordItem item={item} nav={this.props.navigation}/>}
+                        style={{ minWidth: maxWidth, paddingHorizontal: '5%' }}
                     />
                 </SafeAreaView>
             </View>
