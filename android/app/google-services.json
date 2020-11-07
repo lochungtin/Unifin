@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "642053568610",
+    "firebase_url": "https://unifin-5b1fd.firebaseio.com",
+    "project_id": "unifin-5b1fd",
+    "storage_bucket": "unifin-5b1fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642053568610:android:4f8cb9a9bcb13d6302793b",
+        "android_client_info": {
+          "package_name": "com.unifin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642053568610-4709lo2pfosk7u489898sjqg8qastj24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOcT8iuS8oL2oL8rruEbOOzkfmYjVjpc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642053568610-4709lo2pfosk7u489898sjqg8qastj24.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
