@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 
 import { createAccount, genTransactions, fetchRecords } from '../API/CapitalOne';
+import RecordItem from '../Components/RecordItem';
 
 export default class Screen extends React.Component {
 
@@ -9,6 +10,7 @@ export default class Screen extends React.Component {
         super(props);
         this.state = {
             userId: 0,
+            data: [],
         }
     }
 
@@ -35,10 +37,19 @@ export default class Screen extends React.Component {
                 <TouchableOpacity onPress={() => {
                     fetchRecords(this.state.userId).then(res => {
                         console.log(res.Transactions);
+                        this.setState({data: res.Transactions});
                     })
                 }}>
                     <Text>Get Records</Text>
                 </TouchableOpacity>
+
+                <SafeAreaView>
+                    <FlatList 
+                        data={this.state.data}
+                        keyExtractor={item => item.transactionUUID}
+                        renderItem={({item}) => <RecordItem item={item}/>}
+                    />
+                </SafeAreaView>
             </View>
         );
     }
