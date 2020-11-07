@@ -23,7 +23,7 @@ export default class Screen extends React.Component {
   }
   chooseFile = () => {
     var options = {
-      title: 'Select Image',
+      title: '-Upload Photo-',
 
       storageOptions: {
         skipBackup: true,
@@ -53,28 +53,14 @@ export default class Screen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.container}>
-          {/*<Image 
-          source={{ uri: this.state.filePath.path}} 
-          style={{width: 100, height: 100}} />*/}
-          <Image
-            source={{
-              uri: 'data:image/jpeg;base64,' + this.state.filePath.data,
-            }}
-            style={{ width: 100, height: 100 }}
-          />
           <Image
             source={{ uri: this.state.filePath.uri }}
-            style={{ width: 250, height: 250 }}
+            style={{ width: 300, height: 300 }}
           />
-          <Text style={{ alignItems: 'center' }}>
-            {this.state.filePath.uri}
-          </Text>
-          <Text>
-            
-          </Text>
-          {/* <Image source={require('/Users/danieltsang/Documents/Unifin/src/screens/ReceiptSwiss.jpg')} /> */}
-
-          <Button title="Choose File" onPress={this.chooseFile.bind(this)} />
+          <Button title="Choose Reciept" onPress={this.chooseFile.bind(this)} />
+        </View>
+        <View style={styles.container}>
+          {/* some raw data */}
         </View>
       </View>
     );
