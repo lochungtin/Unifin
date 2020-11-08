@@ -48,7 +48,7 @@ export default class Screen extends React.Component {
         if (Platform.OS === 'ios')
           processDocument(response.uri);
         else
-          processDocument(reponse.path);
+          processDocument(response.path);
       }
     });
   };
