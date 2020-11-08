@@ -25,8 +25,8 @@ export async function processDocument(localPath) {
           var date = word.split(' ');
           date.forEach(d => {
             if ((d.length > 7 && d.length < 11) && (d.includes('/') || d.includes('-'))) {
-              if (moment(d, 'MM DD YYYY') !== null);
-              day = moment(d, 'MM DD YYYY');
+              if (moment(d, 'MM DD YYYY') !== null)
+                day = moment(d, 'MM DD YYYY');
             }
           })
         }
@@ -39,7 +39,7 @@ export async function processDocument(localPath) {
     else
       total = numbers[pos];
 
-    return { amount: total, timestamp: day.format('YYYY-MM-DD HH:mm:ss'), merchant: {name: 'Custom Scanned Reciept'}, currency: 'GBP', creditDebitIndicator: 'Cash', transactionUUID: moment().format() };
+    return { amount: total, timestamp: day.format('YYYY-MM-DD HH:mm:ss'), merchant: { name: 'Custom Scanned Reciept', category: 'custom' }, currency: 'GBP', creditDebitIndicator: 'Cash', transactionUUID: moment().format() };
   }
   catch {
     return {};

@@ -9,7 +9,7 @@ import detailScreen from '../screens/detailScreen';
 import homeScreen from '../screens/homeScreen';
 import scanScreen from '../screens/scanScreen';
 import settingsScreen from '../screens/settingsScreen';
-import subScreen from '../screens/subScreen';
+import { accent, black, white } from '../styles';
 
 const Main = createStackNavigator();
 const Root = createBottomTabNavigator();
@@ -55,12 +55,20 @@ class AppNav extends React.Component {
                         }
                     })}
                     tabBarOptions={{
-
+                        activeBackgroundColor: black,
+                        activeTintColor: accent,
+                        inactiveBackgroundColor: black,
+                        inactiveTintColor: white,
+                        keyboardHidesTabBar: true,
+                        showLabel: false,
+                        style: {
+                            backgroundColor: black,
+                            borderTopColor: 'transparent',
+                        },
                     }}
                 >
                     <Root.Screen name='Scan' component={scanScreen} />
                     <Root.Screen name='Home' component={this.main} />
-                    <Root.Screen name='Sub' component={subScreen} />
                     <Root.Screen name='Settings' component={settingsScreen} />
                 </Root.Navigator>
             </NavigationContainer>

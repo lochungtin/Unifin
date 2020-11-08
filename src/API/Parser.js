@@ -1,4 +1,6 @@
+import { accent, white } from "../styles";
 import { mergeSort } from "./MergeSort";
+import { mix } from './Mixer';
 
 export const parsePie = records => {
     var rt = [];
@@ -12,9 +14,11 @@ export const parsePie = records => {
             cats[cat]++;
     }
 
-    for (const key of Object.keys(cats)) {
-
-        rt.push({ percentage: cats[key] / records.length * 100, color: "#555" });
+    var keys = Object.keys(cats);
+    for (var i = 0; i < keys.length; ++i) {
+        var key = keys[i];
+        var alpha = (keys.length - i) / keys.length;
+        rt.push({ percentage: cats[key] / records.length * 100, color: mix(accent, white, alpha) });
     }
 
     console.log(rt);
