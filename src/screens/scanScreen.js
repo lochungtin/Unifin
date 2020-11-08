@@ -1,20 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, Platform } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import { utils } from '@react-native-firebase/app';
-import vision from '@react-native-firebase/ml-vision';
 
-async function processDocument(localPath) {
-  const processed = await vision().cloudDocumentTextRecognizerProcessImage(localPath);
+import { processDocument } from '../API/Vision';
+import { addRecord } from '../redux/action';
+import { store } from '../redux/store';
 
-  console.log('Found text in document: ', processed.text);
-
-  processed.blocks.forEach(block => {
-    console.log('omg this works ', block.text);
-    console.log('Confidence in block: ', block.confidence);
-    console.log('Languages found in block: ', block.recognizedLanguages);
-  });
-}
 export default class Screen extends React.Component {
   constructor(props) {
     super(props);
@@ -42,18 +33,18 @@ export default class Screen extends React.Component {
         let source = response;
         // You can also display the image using data:
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-        this.setState({
-          filePath: source,
-        });
-        try {
-          if (Platform.OS === 'ios')
-            processDocument(response.uri);
-          else
-            processDocument(response.path);
-        }
-        catch {
+        this.setState({ filePath: source, });
 
-        }
+        if (Platform.OS === 'ios')
+          processDocument(response.uri).then(res => {
+            console.log(res);
+            store.dispatch(addRecord(res));
+          });
+        else
+          processDocument(response.path).then(res => {
+            console.log(res);
+            store.dispatch(addRecord(res));
+          });
       }
     });
   };

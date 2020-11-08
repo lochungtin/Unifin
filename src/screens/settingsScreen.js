@@ -23,7 +23,7 @@ class Screen extends React.Component {
                     store.dispatch(clearRecords());
                     createAccount().then(acc => {
                         this.setState({ UID: acc.Accounts[0].accountId });
-                        console.log(acc);
+                        console.log(acc.Accounts[0].accountId);
                         genTransactions(acc.Accounts[0].accountId).then(res => {
                             console.log(res);
                             if (res.Transactions.length > 0) {
@@ -45,7 +45,6 @@ class Screen extends React.Component {
                         fetchRecords(this.state.UID).then(res => {
                             console.log(res.Transactions.length);
                             store.dispatch(addRecords(res.Transactions));
-                            console.log(res.Transactions[0]);
                         })
                     }}>
                         <Text>Sync to local</Text>
