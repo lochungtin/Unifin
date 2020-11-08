@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, Platform } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { utils } from '@react-native-firebase/app';
 import vision from '@react-native-firebase/ml-vision';
+
 async function processDocument(localPath) {
   const processed = await vision().cloudDocumentTextRecognizerProcessImage(localPath);
 
@@ -44,7 +45,10 @@ export default class Screen extends React.Component {
         this.setState({
           filePath: source,
         });
-        processDocument(this.state.filePath.uri);
+        if (Platform.OS === 'ios')
+          processDocument(response.uri);
+        else
+          processDocument(reponse.path);
       }
     });
   };
