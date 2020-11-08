@@ -23,12 +23,17 @@ class Screen extends React.Component {
                     store.dispatch(clearRecords());
                     createAccount().then(acc => {
                         this.setState({ UID: acc.Accounts[0].accountId });
-                        console.log('ok');
+                        console.log(acc);
                         genTransactions(acc.Accounts[0].accountId).then(res => {
-                            if (res.Transactions.length > 0)
+                            console.log(res);
+                            if (res.Transactions.length > 0) {
                                 this.setState({ sync: true });
-                            else
+                                console.log('succ');
+                            }
+                            else {
                                 this.setState({ sync: false });
+                                console.log('fail');
+                            }
                         });
                     });
                 }}>
