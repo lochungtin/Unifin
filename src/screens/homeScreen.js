@@ -5,9 +5,8 @@ import { connect } from 'react-redux';
 
 import { maxWidth, styles, black, white, accent, shade2 } from '../styles';
 import RecordItem from '../Components/RecordItem';
-import Divider from "../Components/Divider";
 
-import { parseAll, parsePie, getMonthly } from '../API/Parser';
+import { getSectors, parsePie, getMonthly } from '../API/Parser';
 
 class Screen extends React.Component {
 
@@ -17,31 +16,28 @@ class Screen extends React.Component {
             userId: 0,
             pie: true,
         }
-        for (const r of parseAll(props.records)) {
-            console.log(r);
-        }
     }
 
     render() {
         return (
             <View style={styles.screen}>
                 <View style={{ flex: 1, height: '10%' }}>
-                    <Text style={{ color: accent, fontSize: 30}}>$ {}</Text>
-                    <Text style={{ color: white, fontSize: 12}}>Monthly Spendings</Text>
+                    <Text style={{ color: accent, fontSize: 35 }}>$ {getMonthly(this.props.records)}</Text>
+                    <Text style={{ color: white, fontSize: 15 }}>Monthly Spendings</Text>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row-reverse', minWidth: maxWidth, paddingRight: '10%', }}>
-                    <View style={{ backgroundColor: white, maxHeight: '30%', flex: 1, justifyContent: 'center', maxWidth: '20%', borderBottomLeftRadius: 30, borderTopLeftRadius: 30 }}>
+                    <View style={{ backgroundColor: white, height: '50%', flex: 1, justifyContent: 'center', maxWidth: '20%', borderBottomLeftRadius: 30, borderTopLeftRadius: 30 }}>
                         <Switch
                             value={this.state.pie}
                             thumbColor={accent}
-                            trackColor={{true: shade2, false: shade2}}
+                            trackColor={{ true: shade2, false: shade2 }}
                             onValueChange={value => this.setState({ pie: value })}
                         />
                     </View>
                 </View>
-                <View style={{ flex: 1, minHeight: '50%' }}>
+                <View style={{ flex: 1, minHeight: '70%' }}>
                     {this.state.pie &&
-                        <>
+                        <SafeAreaView>
                             <Pie
                                 radius={120}
                                 innerRadius={90}
@@ -50,7 +46,19 @@ class Screen extends React.Component {
                                 strokeCap={'butt'}
                                 backgroundColor={black}
                             />
-                        </>
+                            <View style={{ flex: 1, paddingTop: 20 }}>
+                                {getSectors(this.props.records).map(item => {
+                                    return (
+                                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }} key={item.category}>
+                                            <View style={{ height: 10, width: 10, backgroundColor: item.color, borderRadius: 5 }} />
+                                            <View style={{ flex: 1, paddingLeft: 70 }}>
+                                                <Text style={{ color: white }}>{item.category}</Text>
+                                            </View>
+                                        </View>
+                                    );
+                                })}
+                            </View>
+                        </SafeAreaView>
                     }
                     {!this.state.pie &&
                         <SafeAreaView>

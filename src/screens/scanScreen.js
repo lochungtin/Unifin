@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, Platform } from 'react-native';
+import { TouchableOpacity, Text, View, Image, Platform } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 
 import { processDocument } from '../API/Vision';
 import { addRecord } from '../redux/action';
 import { store } from '../redux/store';
+import { accent, styles, white } from '../styles';
 
 export default class Screen extends React.Component {
   constructor(props) {
@@ -51,26 +52,29 @@ export default class Screen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.screen}>
         <View style={styles.container}>
-          <Image
-            source={{ uri: this.state.filePath.uri }}
-            style={{ width: 300, height: 300 }}
-          />
-          <Button title="Choose Reciept" onPress={this.chooseFile.bind(this)} />
-        </View>
-        <View style={styles.container}>
-          {/* some raw data */}
+          <View style={{ maxHeight: 500, paddingHorizontal: 10, paddingVertical: 10, borderWidth: 1, borderColor: white, marginBottom: 15, alignItems: 'center', justifyContent: 'center' }}>
+            {this.state.filePath.uri === undefined &&
+              <>
+                <View style={{ minHeight: '80%'}} />
+                <Text style={{ color: white }}>Select image to analyze or </Text>
+                <Text style={{ color: white }}>Take a picture of your reciept</Text>
+              </>
+            }
+            <Image
+              source={{ uri: this.state.filePath.uri }}
+              style={{ width: 300, height: 500 }}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={this.chooseFile.bind(this)}
+            style={{ ...styles.roundView, backgroundColor: accent, alignItems: 'center' }}
+          >
+            <Text style={{ color: white }}>Load Reciept</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
