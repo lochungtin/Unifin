@@ -1,19 +1,47 @@
-import { utils } from '@react-native-firebase/app';
 import vision from '@react-native-firebase/ml-vision';
+import moment from 'moment';
 
-async function processDocument(localPath) {
-  const processed = await vision().cloudDocumentTextRecognizerProcessImage(localPath);
+export async function processDocument(localPath) {
+  try {
+    const processed = await vision().cloudDocumentTextRecognizerProcessImage(localPath);
 
-  console.log('Found text in document: ', processed.text);
+    var labels;
+    var numbers
+    var pos;
 
-  processed.blocks.forEach(block => {
-    console.log('Found block with text: ', block.text);
-    console.log('Confidence in block: ', block.confidence);
-    console.log('Languages found in block: ', block.recognizedLanguages);
-  });
+    var total;
+    var day;
+
+    for (var i = 0; i < processed.blocks.length; ++i) {
+      var splt = processed.blocks[i].text.split(/\r?\n/);
+      for (var j = 0; j < splt.length; ++j) {
+        var word = splt[j];
+        if (word.startsWith('Total') || word.startsWith('total') || word.startsWith('TOTAL')) {
+          labels = splt;
+          numbers = processed.blocks[i + 1].text.split(/\r?\n/);
+          pos = j;
+        }
+        if (word.includes('/') || word.includes('-')) {
+          var date = word.split(' ');
+          date.forEach(d => {
+            if ((d.length > 7 && d.length < 11) && (d.includes('/') || d.includes('-'))) {
+              if (moment(d, 'MM DD YYYY') !== null)
+                day = moment(d, 'MM DD YYYY');
+            }
+          })
+        }
+      }
+    }
+
+    var regex = /\d/g;
+    if (regex.test(labels[pos]))
+      total = labels[pos].substr('total '.length);
+    else
+      total = numbers[pos];
+
+    return { amount: total, timestamp: day.format('YYYY-MM-DD HH:mm:ss'), merchant: { name: 'Custom Scanned Reciept', category: 'custom' }, currency: 'GBP', creditDebitIndicator: 'Cash', transactionUUID: moment().format() };
+  }
+  catch {
+    return {};
+  }
 }
-
-// Local path to file on the device
-const localFile = `${utils.FilePath.PICTURES_DIRECTORY}/text-document.jpg`;
-
-processDocument(localFile).then(() => console.log('Finished processing file.'));
