@@ -21,6 +21,13 @@
 	<script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+
+	<script type="text/javascript">
+		if (/(?:#|%23)([^\/]+)/.test(location.href))
+			location.href = location.href.replace(/(?:#|%23)([^\/]+)/, '?id=$1')
+		if (/\/#\//.test(location.href))
+			location.href = location.href.replace('/#/', '/')
+	</script>
 </body>
 
 </html>
