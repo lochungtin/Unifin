@@ -1,4 +1,4 @@
-# Unifin <!-- {docsify-ignore} -->
+# Unifin
 
 ## Background
 
