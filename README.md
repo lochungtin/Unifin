@@ -4,7 +4,7 @@
 
 Unifin is a multi-award-winning Hackathon project some of my university classmates and I submitted for [HackSheffield 2020](https://devpost.com/software/unifin). Some of the main sponsors of the Hackathon were Google Cloud Computing and Capital One.
 
-Members of the hackathon team include [Daniel Tsang](https://github.com/danieltsanghang), [Ken Huang](https://kenchihuang.co.uk/), and [myself](https://www.lotimothy.com).
+Members of the hackathon team include [Daniel Tsang](https://github.com/danieltsanghang), [Ken Huang](https://kenchihuang.co.uk/), and [myself](https://lotimothy.com).
 
 ## About the Project
 
